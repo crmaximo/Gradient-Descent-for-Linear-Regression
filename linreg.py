@@ -53,7 +53,7 @@ def gradescent (x, y, coef, learnrate, samplesize):
     while True:
         yprime = np.matmul(x, coef)
         error = yprime - y
-        #using M-P pseudoinverse to solve gradient numerically
+        #using M-P pseudoinverse to solve gradient numerically (basically a least-square method)
         xpinv = np.linalg.pinv(x) 
         gradient = np.matmul(xpinv, error) / samplesize
         coef = coef - np.dot(learnrate, gradient)
