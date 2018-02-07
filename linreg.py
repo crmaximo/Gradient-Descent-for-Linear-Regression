@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 
+#using the increasing learnrate and M-P pseudoinverse as it almost guarantees convergence at 3rd degree polynomials
 def main():
     assert len(sys.argv) <= 5 #up to third degree polynomial only
     
@@ -56,8 +57,8 @@ def gradescent (x, y, coef, learnrate, samplesize):
         xpinv = np.linalg.pinv(x) 
         gradient = np.matmul(xpinv, error) / samplesize
         coef = coef - np.dot(learnrate, gradient)
-        if learnrate * 1.05 < 1:
-            learnrate = 1.05 * learnrate #5percent increase in learn rate per iteration
+        #if learnrate * 1.05 < 1: #used to limit the learnrate
+        learnrate = 1.05 * learnrate #5percent increase in learn rate per iteration
         iteration = iteration + 1
         loss = np.sum(error ** 2) / samplesize
         #xnorm = np.linalg.norm(error)#pseudo MARS norm is used
