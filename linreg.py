@@ -56,7 +56,7 @@ def gradescent (x, y, coef, learnrate, samplesize):
         xpinv = np.linalg.pinv(x) 
         gradient = np.matmul(xpinv, error) / samplesize
         coef = coef - np.dot(learnrate, gradient)
-        while learnrate * 1.05 < 1:
+        if learnrate * 1.05 < 1:
             learnrate = 1.05 * learnrate #5percent increase in learn rate per iteration
         iteration = iteration + 1
         loss = np.sum(error ** 2) / samplesize
